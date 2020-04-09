@@ -36,7 +36,7 @@ export default class FloatingLabelExample extends Component {
             </Item>
           </Form>
           <Button
-            style={{margin: 20, height: 100}}
+            style={{margin: 20, height: 50}}
             iconLeft
             primary
             block
