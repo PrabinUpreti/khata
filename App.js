@@ -1,50 +1,21 @@
 import React, {Component} from 'react';
-import {
-  Container,
-  Content,
-  Form,
-  Item,
-  Input,
-  Label,
-  View,
-  Button,
-  Icon,
-} from 'native-base';
-import {Text} from 'react-native';
-const loginStatus = param => {
-  console.log(param);
-};
-export default class FloatingLabelExample extends Component {
+import LoginApp from './screens/login/LoginApp';
+import {NavigationContainer} from '@react-navigation/native';
+// import 'react-native-gesture-handler';
+import {createStackNavigator} from '@react-navigation/stack';
+import {Colors} from './Colors';
+import HomeApp from './screens/home/HomeApp';
+
+const Stack = createStackNavigator();
+export default class App extends Component {
   render() {
     return (
-      <Container
-        style={{
-          flex: 1,
-          padding: 20,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Content>
-          <View style={{alignItems: 'center', paddingTop: 20}}>
-            <Text style={{fontSize: 30}}>Welcome To khata</Text>
-          </View>
-          <Form>
-            <Item floatingLabel>
-              <Label>pin</Label>
-              <Input passwordRules />
-            </Item>
-          </Form>
-          <Button
-            style={{margin: 20, height: 50}}
-            iconLeft
-            primary
-            block
-            rounded>
-            <Text style={{color: '#fff'}}>Log In</Text>
-            <Icon name="arrow-forward" />
-          </Button>
-        </Content>
-      </Container>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Log In" component={LoginApp} />
+          <Stack.Screen name="Home" component={HomeApp} />
+        </Stack.Navigator>
+      </NavigationContainer>
     );
   }
 }
