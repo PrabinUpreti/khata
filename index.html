@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+  </head>
+  <body>
+    <script>
+      let firebaseConfig = {
+        apiKey: 'AIzaSyCkX0PORemPX7R1fvXHv0qOUPfy23q4u_A',
+        authDomain: 'khata-25a56.firebaseapp.com',
+        databaseURL: 'https://khata-25a56.firebaseio.com',
+        projectId: 'khata-25a56',
+        storageBucket: 'khata-25a56.appspot.com',
+        messagingSenderId: '1088292153842',
+        appId: '1:1088292153842:web:b078c42874e02201ef636b',
+        measurementId: 'G-DMT91HHJXN',
+      };
+      firebase.initializeApp(firebaseConfig);
+      let check = new Promise((resolve, reject) => {
+        const b = firebase.auth().currentUser;
+        if (b) {
+          resolve(b);
+        } else reject(b);
+      });
+      check
+        .then(m => {
+          console.log(m);
+        })
+        .catch(m => {
+          console.log(m);
+        });
+    </script>
+  </body>
+</html>

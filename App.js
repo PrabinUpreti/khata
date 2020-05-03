@@ -1,21 +1,13 @@
 import React, {Component} from 'react';
-import LoginApp from './screens/login/LoginApp';
-import {NavigationContainer} from '@react-navigation/native';
-// import 'react-native-gesture-handler';
-import {createStackNavigator} from '@react-navigation/stack';
-import {Colors} from './Colors';
-import HomeApp from './screens/home/HomeApp';
+import Routes from './configuration/route/Routes';
+import {View, Text} from 'react-native';
 
-const Stack = createStackNavigator();
 export default class App extends Component {
+  state = {
+    user: '',
+    userId: '',
+  };
   render() {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Log In" component={LoginApp} />
-          <Stack.Screen name="Home" component={HomeApp} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
+    return <Routes />;
   }
 }
