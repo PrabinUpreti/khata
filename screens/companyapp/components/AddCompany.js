@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
-import {View, Text, Button, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  TextInput,
+  KeyboardAvoidingView,
+} from 'react-native';
 import {Colors} from './../../../configuration/colors/Colors';
 class AddCompany extends Component {
   state = {
     companyName: '',
+    companyNameWarning: '',
   };
   render() {
     return (
@@ -15,7 +22,11 @@ class AddCompany extends Component {
             alignItems: 'flex-start',
             justifyContent: 'center',
           }}>
-          <Button title="Cancel" onPress={this.props.closeModal} />
+          <Button
+            color={Colors.danger}
+            title="Cancel"
+            onPress={this.props.closeModal}
+          />
         </View>
         <View
           style={{
@@ -29,10 +40,19 @@ class AddCompany extends Component {
           }}>
           <Button
             title="Okay"
-            onPress={() => this.props.createCompany(this.state.companyName)}
+            color={Colors.primary}
+            onPress={() =>
+              isNaN(this.state.companyName)
+                ? this.props.createCompany(this.state.companyName)
+                : this.setState({
+                    companyNameWarning: 'Please enter Company Name',
+                  })
+            }
           />
         </View>
-        <View
+
+        <KeyboardAvoidingView
+          behavior="padding"
           style={{
             // backgroundColor: Colors.lightBlue,
             justifyContent: 'center',
@@ -40,18 +60,26 @@ class AddCompany extends Component {
             marginHorizontal: 20,
           }}>
           <TextInput
-            autoFocus
+            autoFocus={true}
             style={{
-              height: 40,
+              height: 45,
               borderWidth: 1,
               borderColor: Colors.black,
-              paddingHorizontal: 20,
+              paddingHorizontal: 8,
+              paddingVertical: 0,
+              marginVertical: 0,
             }}
             placeholder="Enter Company name"
             onChangeText={text => this.setState({companyName: text})}
           />
-        </View>
-        <Text>{this.state.companyName}</Text>
+
+          <Text
+            style={{
+              color: Colors.danger,
+            }}>
+            {this.state.companyNameWarning}
+          </Text>
+        </KeyboardAvoidingView>
       </View>
     );
   }

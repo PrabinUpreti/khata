@@ -9,7 +9,7 @@ import AddTransaction from './../../screens/companyapp/components/AddTransaction
 
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from './../colors/Colors';
 
 const Stack = createStackNavigator();
 export default class Routes extends Component {
@@ -22,15 +22,21 @@ export default class Routes extends Component {
             options={{
               title: 'Companies',
               headerStyle: {
-                backgroundColor: '#f55',
+                backgroundColor: Colors.warning,
               },
-              headerTintColor: '#fff',
             }}
             component={CompanyApp}
           />
           <Stack.Screen
             name="AddTransaction"
-            options={({route}) => ({title: route.params.name})}
+            options={
+              (({route}) => ({title: route.params.name}),
+              {
+                headerStyle: {
+                  backgroundColor: Colors.warning,
+                },
+              })
+            }
             component={AddTransaction}
           />
 

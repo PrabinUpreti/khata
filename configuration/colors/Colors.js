@@ -1,10 +1,16 @@
 export const Colors = {
-  white: '#ffffff',
+  white: '#fff',
   black: '#565656',
   blue: '#51b8e7',
   lightBlue: '#b9e2f5',
   green: '#80e91e',
   lightGreen: '#8abaae',
   gray: '#dddddd',
-  dark: '#aaaaaa',
+  dark: '#343a40',
+  danger: '#dd4445',
+  primary: '#027bfd',
+  sucess: '#59a847',
+  secondary: '#6c757d',
+  warning: '#f9c128',
+  info: '#46a3b9',
 };

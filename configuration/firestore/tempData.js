@@ -10,6 +10,7 @@ export const ComContent = [
     comId: 0,
     transactions: [
       {
+        comContentId: 0,
         description: 'Ram Le chokar lageko',
         year: 2077,
         month: 'Baishak',
@@ -20,6 +21,8 @@ export const ComContent = [
         account: 'dr',
       },
       {
+        comContentId: 1,
+
         description: '2 bora pitho lera aako',
         year: 2077,
         month: 'Baishak',
@@ -30,6 +33,8 @@ export const ComContent = [
         account: 'cr',
       },
       {
+        comContentId: 2,
+
         description: 'Kisna Sabjilai Deko',
         year: 2077,
         month: 'Baishak',

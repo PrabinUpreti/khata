@@ -15,13 +15,18 @@ const CompanyList = props => {
   return (
     <TouchableOpacity
       style={{
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.info,
         marginBottom: 5,
         alignSelf: 'stretch',
-        borderRadius: 10,
+        borderTopRightRadius: 20,
+        borderBottomLeftRadius: 20,
       }}
       onPress={() =>
-        props.navigate('AddTransaction', {name: props.value, id: props.id})
+        props.navigate('AddTransaction', {
+          name: props.value,
+          id: props.id,
+          key: props.key,
+        })
       }>
       <Text
         style={{
@@ -56,7 +61,7 @@ export default class CompanyApp extends Component {
     return (
       <View style={Styles.container}>
         <ScrollView
-          style={{alignSelf: 'stretch', paddingHorizontal: 20, marginTop: 10}}>
+          style={{alignSelf: 'stretch', paddingHorizontal: 10, marginTop: 10}}>
           <View>
             {Com.length ? (
               Com.map(company => (
