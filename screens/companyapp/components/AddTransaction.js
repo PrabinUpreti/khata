@@ -1,9 +1,10 @@
 import React, {Component, Fragment} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Modal, KeyboardAvoidingView} from 'react-native';
 import {Colors} from './../../../configuration/colors/Colors';
-import {ComContent} from './../../../configuration/firestore/tempData';
+import {company_transaction} from './../../../configuration/firestore/tempData';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {Button} from 'native-base';
+import TransactionForm from './TransactionForm';
 
 LoadTransaction = props => {
   return (
@@ -21,7 +22,9 @@ DesignLoadTransactions = props => {
   console.log(props);
   return (
     // <ScrollView>
+
     <TouchableOpacity
+      activeOpacity={0.9}
       style={{
         marginBottom: 10,
         marginHorizontal: 10,
@@ -90,13 +93,34 @@ DesignLoadTransactions = props => {
 };
 
 class AddTransaction extends Component {
+  toggleModal = () => this.setState({modalStatus: !this.state.modalStatus});
+  createTransaction = value => {};
+
   newArray = [];
 
-  state = {};
+  state = {
+    company_name_id: null,
+    transactions: [
+      {
+        id: null,
+        remarks: '',
+        year: null,
+        month: '',
+        day: null,
+        time: '',
+        amount: null,
+        status: '',
+        transaction_to: '',
+        transaction_from: '',
+        documents: [],
+      },
+    ],
+    modalStatus: false,
+  };
   render() {
-    ComContent.length
-      ? (this.newArray = ComContent.filter(a => {
-          return a.comId === this.props.route.params.id;
+    company_transaction.length
+      ? (this.newArray = company_transaction.filter(a => {
+          return a.company_name_id === this.props.route.params.id;
         }))
       : null;
     // console.log(ComContent);
@@ -111,7 +135,7 @@ class AddTransaction extends Component {
         <ScrollView style={{alignSelf: 'stretch', marginTop: 10}}>
           {this.newArray.length ? (
             this.newArray.map(d => (
-              <LoadTransaction key={d.comId} value={d.transactions} />
+              <LoadTransaction key={d.company_name_id} value={d.transactions} />
             ))
           ) : (
             <Text>No Datas</Text>
@@ -134,6 +158,16 @@ class AddTransaction extends Component {
             Add Transaction
           </Text>
         </TouchableOpacity>
+
+        <Modal
+          animationType="slide"
+          visible={this.state.modalStatus}
+          onRequestClose={() => this.toggleModal()}>
+          <TransactionForm
+            closeModal={() => this.toggleModal()}
+            createTransaction={value => this.createTransaction(value)}
+          />
+        </Modal>
       </View>
     );
   }

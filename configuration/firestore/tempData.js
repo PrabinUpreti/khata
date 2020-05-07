@@ -1,24 +1,20 @@
-export const Com = [
-  // {companyName: 'Mill', id: 0},
-  // {companyName: 'Home Expenditure', id: 1},
-  // {companyName: 'Bank', id: 2},
-  // {companyName: 'tika', id: 7},
-  // {companyName: 'Milk', id: 3},
-];
-export const ComContent = [
+export const company_name = [];
+export const company_transaction = [
   {
-    comId: 0,
+    company_name_id: 0,
     transactions: [
       {
-        comContentId: 0,
-        description: 'Ram Le chokar lageko',
+        id: 0,
+        remarks: 'Ram Le chokar lageko',
         year: 2077,
         month: 'Baishak',
         day: 20,
-        week: 'sunday',
         time: '8:59 AM',
         amount: 5000,
-        account: 'dr',
+        status: 'dr',
+        transaction_to: '',
+        transaction_from: '',
+        documents: [],
       },
       {
         comContentId: 1,

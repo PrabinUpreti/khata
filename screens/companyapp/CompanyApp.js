@@ -1,31 +1,39 @@
 import React, {Component, Fragment} from 'react';
-import {View, Text, Modal, Button} from 'react-native';
+import {View, Text, Button} from 'react-native';
 import {Colors} from './../../configuration/colors/Colors';
 import {Styles} from './CompanyAppStyles';
-import {Com, ComContent} from './../../configuration/firestore/tempData';
+import {
+  company_name,
+  company_transaction,
+} from './../../configuration/firestore/tempData';
 import {
   ScrollView,
   TouchableOpacity,
   TextInput,
 } from 'react-native-gesture-handler';
 import {} from 'native-base';
+import Modal from 'react-native-modal';
 import AddCompany from './components/AddCompany';
 
 const CompanyList = props => {
+  // console.log(props);
   return (
     <TouchableOpacity
+      activeOpacity={0.8}
       style={{
+        elevation: 3,
         backgroundColor: Colors.info,
         marginBottom: 5,
         alignSelf: 'stretch',
         borderTopRightRadius: 20,
         borderBottomLeftRadius: 20,
       }}
+      key={props.id}
       onPress={() =>
         props.navigate('AddTransaction', {
           name: props.value,
           id: props.id,
-          key: props.key,
+          // key: props.key,
         })
       }>
       <Text
@@ -46,12 +54,18 @@ export default class CompanyApp extends Component {
   state = {
     active: false,
     modalStatus: false,
+    coverScreen: false,
   };
   toggleModal = () => {
     this.setState({modalStatus: !this.state.modalStatus});
+
+    setTimeout(() => {
+      this.setState({coverScreen: false});
+    }, 500);
   };
   createCompany = name => {
-    Com.push({companyName: name, id: Com.length});
+    this.setState({coverScreen: true});
+    company_name.push({companyName: name, id: company_name.length});
     this.toggleModal();
   };
 
@@ -63,8 +77,8 @@ export default class CompanyApp extends Component {
         <ScrollView
           style={{alignSelf: 'stretch', paddingHorizontal: 10, marginTop: 10}}>
           <View>
-            {Com.length ? (
-              Com.map(company => (
+            {company_name.length ? (
+              company_name.map(company => (
                 <CompanyList
                   navigate={navigate}
                   id={company.id}
@@ -83,9 +97,20 @@ export default class CompanyApp extends Component {
           <Text style={Styles.addCompanyBtnText}>Add Company</Text>
         </TouchableOpacity>
         <Modal
-          animationType="slide"
-          visible={this.state.modalStatus}
-          onRequestClose={() => this.toggleModal()}>
+          animationIn="slideInLeft"
+          animationInTiming={500}
+          avoidKeyboard={true}
+          animationOut="slideOutRight"
+          animationOutTiming={500}
+          coverScreen={this.state.coverScreen}
+          style={{
+            // alignItems: 'stretch',
+            marginTop: -50,
+            // paddingVertical: 0,
+            // backgroundColor: Colors.primary,
+            // marginHorizontal: 0,
+          }}
+          isVisible={this.state.modalStatus}>
           <AddCompany
             closeModal={() => this.toggleModal()}
             createCompany={name => this.createCompany(name)}
