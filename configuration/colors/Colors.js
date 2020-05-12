@@ -13,4 +13,6 @@ export const Colors = {
   secondary: '#6c757d',
   warning: '#f9c128',
   info: '#46a3b9',
+  primaryWithTransparency: '#027bfdcc',
+  grayWithTransparency: '#ddddddcc',
 };

@@ -10,6 +10,7 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  TouchableNativeFeedback,
 } from 'react-native-gesture-handler';
 import {} from 'native-base';
 import Modal from 'react-native-modal';
@@ -75,7 +76,12 @@ export default class CompanyApp extends Component {
     return (
       <View style={Styles.container}>
         <ScrollView
-          style={{alignSelf: 'stretch', paddingHorizontal: 10, marginTop: 10}}>
+          style={{
+            alignSelf: 'stretch',
+            backgroundColor: Colors.blue,
+            paddingHorizontal: 10,
+            marginTop: 10,
+          }}>
           <View>
             {company_name.length ? (
               company_name.map(company => (
@@ -90,12 +96,17 @@ export default class CompanyApp extends Component {
               <Text>No datas</Text>
             )}
           </View>
+          <View style={Styles.addCompanyBtn}>
+            <TouchableNativeFeedback
+              style={{elevation: 3}}
+              onPress={this.toggleModal}>
+              <View style={{backgroundColor: Colors.info}}>
+                <Text style={Styles.addCompanyBtnText}>+</Text>
+              </View>
+            </TouchableNativeFeedback>
+          </View>
         </ScrollView>
-        <TouchableOpacity
-          style={Styles.addCompanyBtn}
-          onPress={this.toggleModal}>
-          <Text style={Styles.addCompanyBtnText}>Add Company</Text>
-        </TouchableOpacity>
+
         <Modal
           animationIn="slideInLeft"
           animationInTiming={500}

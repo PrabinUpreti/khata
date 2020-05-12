@@ -1,5 +1,5 @@
 import firebase, {firestore, auth} from 'firebase';
-import {fbConf} from './FirebaseConfig';
+import Auth from './FirebaseConfig';
 import '@firebase/firestore';
 import '@firebase/auth';
 import React, {Component} from 'react';
@@ -12,42 +12,30 @@ import {View, Text} from 'native-base';
 
 export default class FireAuth extends Component {
   state = {
-    loginStatus: false,
+    loginStatus: null,
   };
-  componentDidMount = () => {
-    this.init();
-  };
-  init = () => {
-    let user = new Promise((resolve, reject) => {
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          resolve(user.email);
-        } else {
-          reject('No user logged in..');
-        }
-      });
+  componentDidMount() {
+    Auth.onAuthStateChanged(user => {
+      if (user) {
+        console.log(user);
+        this.setState({loginStatus: true});
+      } else {
+        console.log('No User');
+      }
     });
-
-    console.log(user);
-  };
+  }
 
   render() {
     console.log(this.state.loginStatus);
-    if (this.state.loginStatus) {
-      this.props.navigation.navigate('Home');
-    }
+    this.state.loginStatus
+      ? this.props.navigation.navigate('Home')
+      : this.props.navigation.navigate('Login');
+
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <Text>Loading...</Text>
         <ActivityIndicator size={'large'} />
       </View>
     );
-    // } while (!this.state.loginStatus);
-
-    // return (
-    //   <View>
-    //     <Text>Hello World How Are You Man</Text>
-    //   </View>
-    // );
   }
 }

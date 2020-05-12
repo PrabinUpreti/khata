@@ -13,14 +13,14 @@ export const Styles = StyleSheet.create({
   // alignContent: 'flex-start',
   // },
   addCompanyBtn: {
-    backgroundColor: Colors.primary,
-    marginTop: 5,
-    alignItems: 'flex-start',
+    backgroundColor: Colors.lightBlue,
+    height: 100,
+    width: 100,
   },
   addCompanyBtnText: {
-    margin: 10,
+    // margin: 10,
     color: Colors.white,
-    fontSize: 20,
+    fontSize: 24,
     alignSelf: 'center',
   },
 });
