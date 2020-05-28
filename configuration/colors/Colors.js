@@ -15,4 +15,9 @@ export const Colors = {
   info: '#46a3b9',
   primaryWithTransparency: '#027bfdcc',
   grayWithTransparency: '#ddddddcc',
+  bgColor: '#192941',
+  subBgColor: '#303a52',
+  bigBgColors: '#304a62',
+
+  bigBgColorsWithTransparency: '#304a62dd',
 };

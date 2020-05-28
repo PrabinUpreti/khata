@@ -4,8 +4,6 @@ import {Colors} from '../../configuration/colors/Colors';
 export const Styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: 'center',
-    justifyContent: 'center',
   },
   // card: {
   // alignSelf: 'stretch',
@@ -13,14 +11,22 @@ export const Styles = StyleSheet.create({
   // alignContent: 'flex-start',
   // },
   addCompanyBtn: {
-    backgroundColor: Colors.lightBlue,
-    height: 100,
-    width: 100,
+    flex: 1,
+    backgroundColor: Colors.primary,
+    borderRadius: 70,
+    height: 70,
+    width: 70,
+    alignSelf: 'center',
+    position: 'absolute',
+    bottom: -35,
+    // right: 15,
+    zIndex: 100,
   },
   addCompanyBtnText: {
     // margin: 10,
     color: Colors.white,
-    fontSize: 24,
+    fontSize: 34,
+    paddingBottom: 4,
     alignSelf: 'center',
   },
 });

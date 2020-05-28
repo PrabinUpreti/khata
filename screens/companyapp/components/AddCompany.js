@@ -29,7 +29,10 @@ import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 
 class AddCompany extends Component {
   state = {
-    companyName: '',
+    companyName: 'Radha krishna Kutani Pisani Mill ',
+    companyDescription: 'This Mill is the one and only a fevroit mill',
+    // companyName: '',
+    // companyDescription: '',
     companyNameWarning: false,
     avatarSource: null,
     backimg: require('./../../../assets/img/company.png'),
@@ -65,20 +68,23 @@ class AddCompany extends Component {
       <View
         style={{
           // flex: 1,
-          backgroundColor: '#FFFFFFf0',
+          backgroundColor: Colors.subBgColor,
           justifyContent: 'center',
           paddingHorizontal: 20,
           paddingVertical: 20,
-          borderRadius: 10,
+          borderRadius: 20,
+          marginHorizontal: 20,
         }}>
         <View
           style={{
             // flex: 0.1,
+            alignSelf: 'flex-start',
+            paddingRight: 20,
             marginBottom: 20,
             // backgroundColor: Colors.info,
           }}>
           <TouchableOpacity onPress={this.props.closeModal}>
-            <Icon name="md-arrow-back" size={40} color={Colors.black} />
+            <Icon name="md-arrow-back" size={40} color={Colors.white} />
           </TouchableOpacity>
         </View>
         <View
@@ -89,10 +95,12 @@ class AddCompany extends Component {
           }}>
           <View style={{alignSelf: 'flex-start'}}>
             <TouchableOpacity
-              style={{
-                // backgroundColor: Colors.gray,
-                borderRadius: 10,
-              }}
+              style={
+                {
+                  // borderColor: Colors.white,
+                  // borderRadius: 10,
+                }
+              }
               activeOpacity={0.8}
               onPress={this.selectImage}>
               {this.state.avatarSource ? (
@@ -112,6 +120,7 @@ class AddCompany extends Component {
                   style={{
                     height: 100,
                     width: 100,
+                    borderColor: Colors.white,
                     borderWidth: 1,
                     borderRadius: 10,
                     borderStyle: 'dashed',
@@ -122,39 +131,66 @@ class AddCompany extends Component {
                     style={{
                       height: 50,
                       width: 50,
+                      color: Colors.white,
                     }}
                     source={this.state.backimg}
                   />
-                  <Text>Photo</Text>
+                  <Text style={{color: Colors.white}}>Photo</Text>
                 </TouchableOpacity>
               )}
             </TouchableOpacity>
           </View>
-          <KeyboardAvoidingView behavior="padding">
+          <KeyboardAvoidingView behavior="height">
             <Text
               style={{
                 color: this.state.companyNameWarning
                   ? Colors.danger
-                  : Colors.dark,
-                fontSize: 24,
+                  : Colors.white,
+                fontSize: 20,
                 marginBottom: 5,
               }}>
-              Company Name:
+              Company Name*:
             </Text>
             <TextInput
               autoFocus={true}
+              placeholderTextColor={Colors.gray}
               style={{
                 borderRadius: 10,
                 height: 45,
                 borderWidth: 1,
                 borderColor: this.state.companyNameWarning
                   ? Colors.danger
-                  : Colors.black,
+                  : Colors.white,
                 paddingHorizontal: 8,
                 marginBottom: 5,
+                color: Colors.white,
               }}
               placeholder="Enter Company name"
               onChangeText={text => this.setState({companyName: text})}
+            />
+
+            <Text
+              style={{
+                fontSize: 20,
+                marginBottom: 5,
+                color: Colors.white,
+              }}>
+              Company Description:
+            </Text>
+
+            <TextInput
+              placeholderTextColor={Colors.gray}
+              style={{
+                borderRadius: 10,
+                borderColor: Colors.white,
+                height: 45,
+                borderWidth: 1,
+                paddingHorizontal: 8,
+                marginBottom: 5,
+                color: Colors.white,
+              }}
+              placeholder="Enter Company Description"
+              onChangeText={text => this.setState({companyDescription: text})}
             />
           </KeyboardAvoidingView>
 
@@ -189,15 +225,18 @@ class AddCompany extends Component {
                   alignItems: 'center',
                   backgroundColor:
                     this.state.companyName.length >= 4
-                      ? Colors.primary
-                      : Colors.gray,
+                      ? Colors.bigBgColors
+                      : Colors.bgColor,
                   borderRadius: 10,
                 }}
                 disabled={this.state.companyName.length >= 4 ? false : true}
                 color={Colors.primary}
                 onPress={() =>
                   isNaN(this.state.companyName)
-                    ? this.props.createCompany(this.state.companyName)
+                    ? this.props.createCompany([
+                        this.state.companyName,
+                        this.state.companyDescription,
+                      ])
                     : this.setState({
                         companyNameWarning: true,
                       })

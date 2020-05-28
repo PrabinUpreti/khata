@@ -3,8 +3,16 @@ import {View, Text, Modal, KeyboardAvoidingView} from 'react-native';
 import {Colors} from './../../../configuration/colors/Colors';
 import {company_transaction} from './../../../configuration/firestore/tempData';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
-import {Button} from 'native-base';
 import TransactionForm from './TransactionForm';
+import {
+  FAB,
+  Avatar,
+  Button,
+  IconButton,
+  Card,
+  Title,
+  Paragraph,
+} from 'react-native-paper';
 
 LoadTransaction = props => {
   return (
@@ -18,76 +26,107 @@ LoadTransaction = props => {
     </Fragment>
   );
 };
+
 DesignLoadTransactions = props => {
   console.log(props);
   return (
     // <ScrollView>
-
-    <TouchableOpacity
-      activeOpacity={0.9}
-      style={{
-        marginBottom: 10,
-        marginHorizontal: 10,
-        borderTopLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        backgroundColor:
-          props.value.account === 'dr' ? Colors.danger : Colors.sucess,
-      }}>
-      <Text
+    <>
+      <Card
         style={{
-          alignSelf: 'flex-start',
-          fontSize: 18,
-          fontWeight: '900',
-          paddingHorizontal: 10,
-          paddingVertical: 5,
-          color: Colors.white,
+          backgroundColor: Colors.subBgColor,
+          margin: 3,
+          elevation: 3,
         }}>
-        {props.value.description}
-      </Text>
-      <View
-        style={{
-          alignSelf: 'stretch',
-          borderTopWidth: 1,
-          borderColor: Colors.white,
-          marginHorizontal: 5,
-        }}
-      />
-      <View
-        style={{
-          // alignSelf: 'flex-end',
-          fontSize: 15,
+        <Card.Content>
+          <Title
+            style={{
+              color:
+                props.value.status === 'dr' ? Colors.danger : Colors.sucess,
+            }}>
+            {props.value.remarks}
+          </Title>
+          <Paragraph style={{color: Colors.white}}>
+            {props.value.day} {props.value.month} {props.value.year}
+          </Paragraph>
 
-          paddingHorizontal: 10,
-          paddingBottom: 20,
-          color: Colors.black,
-          alignItems: 'flex-end',
+          <Paragraph style={{color: Colors.white}}>
+            Rs. {props.value.amount}
+          </Paragraph>
+          <Paragraph style={{color: Colors.white}}>
+            {props.value.time}
+          </Paragraph>
+          <Paragraph style={{color: Colors.white}}>
+            {props.value.status == 'dr' ? 'Debit' : 'Credit'}
+          </Paragraph>
+        </Card.Content>
+      </Card>
+
+      {/* <TouchableOpacity
+        activeOpacity={0.9}
+        style={{
+          marginBottom: 10,
+          marginHorizontal: 10,
+          // borderTopLeftRadius: 20,
+          // borderBottomRightRadius: 20,
+          backgroundColor: Colors.subBgColor,
         }}>
         <Text
           style={{
-            color: Colors.white,
+            alignSelf: 'flex-start',
+            fontSize: 18,
+            fontWeight: '900',
+            paddingHorizontal: 10,
+            paddingVertical: 5,
+            color: props.value.status === 'dr' ? Colors.danger : Colors.sucess,
           }}>
-          {''} {props.value.day} {props.value.month} {props.value.year}
+          {props.value.remarks}
         </Text>
-        <Text
+        <View
           style={{
-            color: Colors.white,
-          }}>
-          {props.value.time}
-        </Text>
-        <Text
+            alignSelf: 'stretch',
+            borderTopWidth: 2,
+            borderColor: Colors.bgColor,
+            marginHorizontal: 0,
+          }}
+        />
+        <View
           style={{
-            color: Colors.white,
+            // alignSelf: 'flex-end',
+            fontSize: 15,
+
+            paddingHorizontal: 10,
+            paddingBottom: 20,
+            color: Colors.black,
+            alignItems: 'flex-end',
           }}>
-          Rs. {props.value.amount}
-        </Text>
-        <Text
-          style={{
-            color: Colors.white,
-          }}>
-          {props.value.account == 'dr' ? 'Debited' : 'Credited'}
-        </Text>
-      </View>
-    </TouchableOpacity>
+          <Text
+            style={{
+              color: Colors.white,
+            }}>
+            {''} {props.value.day} {props.value.month} {props.value.year}
+          </Text>
+          <Text
+            style={{
+              color: Colors.white,
+            }}>
+            {props.value.time}
+          </Text>
+          <Text
+            style={{
+              color: Colors.white,
+            }}>
+            Rs. {props.value.amount}
+          </Text>
+          <Text
+            style={{
+              color: Colors.white,
+            }}>
+            {props.value.status == 'dr' ? 'Debit' : 'Credit'}
+          </Text>
+        </View>
+      </TouchableOpacity> */}
+    </>
     // </ScrollView>
   );
 };
@@ -129,8 +168,9 @@ class AddTransaction extends Component {
       <View
         style={{
           flex: 1,
-          // alignItems: 'center',
+          backgroundColor: Colors.bgColor,
           justifyContent: 'center',
+          alignItems: 'center',
         }}>
         <ScrollView style={{alignSelf: 'stretch', marginTop: 10}}>
           {this.newArray.length ? (
@@ -138,10 +178,12 @@ class AddTransaction extends Component {
               <LoadTransaction key={d.company_name_id} value={d.transactions} />
             ))
           ) : (
-            <Text>No Datas</Text>
+            <Text style={{alignSelf: 'center', color: Colors.gray}}>
+              No Datas
+            </Text>
           )}
         </ScrollView>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{
             backgroundColor: Colors.info,
             alignSelf: 'stretch',
@@ -157,7 +199,7 @@ class AddTransaction extends Component {
             }}>
             Add Transaction
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <Modal
           animationType="slide"
@@ -168,6 +210,20 @@ class AddTransaction extends Component {
             createTransaction={value => this.createTransaction(value)}
           />
         </Modal>
+        <FAB
+          style={{
+            position: 'absolute',
+            margin: 16,
+            right: 0,
+            bottom: 0,
+            backgroundColor: Colors.bigBgColorsWithTransparency,
+          }}
+          // label="Add transaction"
+          icon="plus"
+          theme={{dark: false}}
+          color={Colors.white}
+          onPress={this.toggleModal}
+        />
       </View>
     );
   }

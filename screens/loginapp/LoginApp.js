@@ -67,7 +67,7 @@ export default class LoginApp extends Component {
         ) : (
           <ImageBackground
             resizeMode="cover"
-            blurRadius={0.8}
+            blurRadius={1}
             source={require('./../../assets/img/bg.jpg')}
             style={Styles.container}>
             <View style={{marginBottom: 20}}>
