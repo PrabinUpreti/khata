@@ -3,7 +3,6 @@ import {
   View,
   Text,
   Button,
-  TextInput,
   KeyboardAvoidingView,
   Image,
   ImageBackground,
@@ -12,6 +11,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from './../../../configuration/colors/Colors';
 import ImagePicker from 'react-native-image-picker';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import {TextInput, Appbar, Divider} from 'react-native-paper';
 
 // const options = {
 //   title: 'Select Avatar',
@@ -29,10 +29,18 @@ import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 
 class AddCompany extends Component {
   state = {
-    companyName: 'Radha krishna Kutani Pisani Mill ',
-    companyDescription: 'This Mill is the one and only a fevroit mill',
-    // companyName: '',
-    // companyDescription: '',
+    // name: 'Radha krishna Kutani Pisani Mill ',
+    // companyAddress: 'This Mill is the one and only a fevroit mill',
+    name: '',
+    companyAddress: '',
+    propiterName: '',
+    panNumber: '',
+    phone: '',
+    website: '',
+    email: '',
+    zip: '',
+    logo: '',
+
     companyNameWarning: false,
     avatarSource: null,
     backimg: require('./../../../assets/img/company.png'),
@@ -67,33 +75,30 @@ class AddCompany extends Component {
     return (
       <View
         style={{
-          // flex: 1,
-          backgroundColor: Colors.subBgColor,
+          backgroundColor: Colors.white,
           justifyContent: 'center',
-          paddingHorizontal: 20,
-          paddingVertical: 20,
-          borderRadius: 20,
-          marginHorizontal: 20,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
         }}>
         <View
           style={{
-            // flex: 0.1,
             alignSelf: 'flex-start',
             paddingRight: 20,
-            marginBottom: 20,
+            marginVertical: 10,
             // backgroundColor: Colors.info,
+            paddingHorizontal: 20,
           }}>
           <TouchableOpacity onPress={this.props.closeModal}>
-            <Icon name="md-arrow-back" size={40} color={Colors.white} />
+            <Icon name="md-arrow-back" size={30} color={Colors.black} />
           </TouchableOpacity>
         </View>
-        <View
+        <Divider />
+        <ScrollView
           style={{
-            // flex: 0.9,
-            justifyContent: 'center',
-            // backgroundColor: Colors.primary,
+            paddingHorizontal: 20,
+            paddingVertical: 20,
           }}>
-          <View style={{alignSelf: 'flex-start'}}>
+          <View style={{alignSelf: 'center'}}>
             <TouchableOpacity
               style={
                 {
@@ -120,7 +125,7 @@ class AddCompany extends Component {
                   style={{
                     height: 100,
                     width: 100,
-                    borderColor: Colors.white,
+                    borderColor: Colors.black,
                     borderWidth: 1,
                     borderRadius: 10,
                     borderStyle: 'dashed',
@@ -131,111 +136,233 @@ class AddCompany extends Component {
                     style={{
                       height: 50,
                       width: 50,
-                      color: Colors.white,
+                      color: Colors.black,
                     }}
                     source={this.state.backimg}
                   />
-                  <Text style={{color: Colors.white}}>Photo</Text>
+                  <Text style={{color: Colors.black}}>Photo</Text>
                 </TouchableOpacity>
               )}
             </TouchableOpacity>
           </View>
-          <KeyboardAvoidingView behavior="height">
-            <Text
-              style={{
-                color: this.state.companyNameWarning
-                  ? Colors.danger
-                  : Colors.white,
-                fontSize: 20,
-                marginBottom: 5,
-              }}>
-              Company Name*:
-            </Text>
+
+          <KeyboardAvoidingView behavior="padding">
             <TextInput
+              returnKeyType="next"
+              label="Company Name*"
+              onSubmitEditing={() => {
+                this.secondTextInput.focus();
+              }}
+              blurOnSubmit={false}
+              mode="flat"
               autoFocus={true}
-              placeholderTextColor={Colors.gray}
               style={{
-                borderRadius: 10,
-                height: 45,
-                borderWidth: 1,
-                borderColor: this.state.companyNameWarning
-                  ? Colors.danger
-                  : Colors.white,
-                paddingHorizontal: 8,
-                marginBottom: 5,
+                borderColor: Colors.danger,
                 color: Colors.white,
+                backgroundColor: Colors.white,
+                marginVertical: 5,
               }}
               placeholder="Enter Company name"
-              onChangeText={text => this.setState({companyName: text})}
+              onChangeText={text => this.setState({name: text})}
             />
-
-            <Text
-              style={{
-                fontSize: 20,
-                marginBottom: 5,
-                color: Colors.white,
-              }}>
-              Company Description:
-            </Text>
 
             <TextInput
-              placeholderTextColor={Colors.gray}
+              returnKeyType="next"
+              ref={input => {
+                this.secondTextInput = input;
+              }}
+              onSubmitEditing={() => {
+                this.thirdTextInput.focus();
+              }}
+              blurOnSubmit={false}
+              label="Company Address*"
+              mode="flat"
               style={{
                 borderRadius: 10,
-                borderColor: Colors.white,
-                height: 45,
-                borderWidth: 1,
-                paddingHorizontal: 8,
+                // borderColor: Colors.white,
+                // height: 45,
+                // borderWidth: 1,
                 marginBottom: 5,
-                color: Colors.white,
+                backgroundColor: Colors.white,
+                marginVertical: 5,
               }}
-              placeholder="Enter Company Description"
-              onChangeText={text => this.setState({companyDescription: text})}
+              placeholder="Enter Address"
+              onChangeText={text => this.setState({companyAddress: text})}
             />
-          </KeyboardAvoidingView>
 
-          <View
-            style={{
-              marginTop: 10,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
+            <TextInput
+              returnKeyType="next"
+              ref={input => {
+                this.thirdTextInput = input;
+              }}
+              onSubmitEditing={() => {
+                this.fourthTextInput.focus();
+              }}
+              blurOnSubmit={false}
+              label="Propiter"
+              mode="flat"
+              style={{
+                borderRadius: 10,
+                // borderColor: Colors.white,
+                // height: 45,
+                // borderWidth: 1,
+                marginBottom: 5,
+                backgroundColor: Colors.white,
+                marginVertical: 5,
+              }}
+              placeholder="Enter propiter name"
+              onChangeText={text => this.setState({propiterName: text})}
+            />
+
+            <TextInput
+              autoCapitalize="none"
+              returnKeyType="next"
+              ref={input => {
+                this.fourthTextInput = input;
+              }}
+              onSubmitEditing={() => {
+                this.fifthTextInput.focus();
+              }}
+              blurOnSubmit={false}
+              label="Website"
+              mode="flat"
+              style={{
+                borderRadius: 10,
+                // borderColor: Colors.white,
+                // height: 45,
+                // borderWidth: 1,
+                marginBottom: 5,
+                backgroundColor: Colors.white,
+              }}
+              placeholder="Website"
+              onChangeText={text => this.setState({website: text})}
+            />
             <View
               style={{
-                // flex: 1,
-                marginRight: 2,
-                fontSize: 24,
-                height: 45,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
               }}>
-              {/* <Button
-              disabled
-              color={Colors.danger}
-              title="Cancel"
-              onPress={this.props.closeModal}
-            /> */}
+              <View style={{width: '49%'}}>
+                <TextInput
+                  returnKeyType="next"
+                  ref={input => {
+                    this.fifthTextInput = input;
+                  }}
+                  onSubmitEditing={() => {
+                    this.sixthTextInput.focus();
+                  }}
+                  blurOnSubmit={false}
+                  label="PAN Number"
+                  mode="flat"
+                  style={{
+                    borderRadius: 10,
+                    // borderColor: Colors.white,
+                    // height: 45,
+                    // borderWidth: 1,
+                    marginBottom: 5,
+                    backgroundColor: Colors.white,
+                  }}
+                  placeholder="PAN Number"
+                  onChangeText={text => this.setState({panNumber: text})}
+                />
+              </View>
+              <View style={{width: '49%'}}>
+                <TextInput
+                  returnKeyType="next"
+                  ref={input => {
+                    this.sixthTextInput = input;
+                  }}
+                  onSubmitEditing={() => {
+                    this.seventhTextInput.focus();
+                  }}
+                  blurOnSubmit={false}
+                  keyboardType="phone-pad"
+                  label="Phone*"
+                  mode="flat"
+                  style={{
+                    borderRadius: 10,
+                    // borderColor: Colors.white,
+                    // height: 45,
+                    // borderWidth: 1,
+                    marginBottom: 5,
+                    backgroundColor: Colors.white,
+                  }}
+                  placeholder="Phone"
+                  onChangeText={text => this.setState({phone: text})}
+                />
+              </View>
             </View>
+
             <View
-              style={{
-                flex: 1,
-                marginLeft: 2,
-              }}>
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <View style={{width: '69%'}}>
+                <TextInput
+                  autoCapitalize="none"
+                  returnKeyType="next"
+                  autoCompleteType="email"
+                  ref={input => {
+                    this.seventhTextInput = input;
+                  }}
+                  onSubmitEditing={() => {
+                    this.eightTextInput.focus();
+                  }}
+                  blurOnSubmit={false}
+                  keyboardType="email-address"
+                  label="E-mail"
+                  mode="flat"
+                  style={{
+                    borderRadius: 10,
+                    // borderColor: Colors.white,
+                    // height: 45,
+                    // borderWidth: 1,
+                    marginBottom: 5,
+                    backgroundColor: Colors.white,
+                  }}
+                  placeholder="E-mail"
+                  onChangeText={text => this.setState({email: text})}
+                />
+              </View>
+              <View style={{width: '29%'}}>
+                <TextInput
+                  ref={input => {
+                    this.eightTextInput = input;
+                  }}
+                  // blurOnSubmit={false}
+                  keyboardType="number-pad"
+                  label="Zip Code"
+                  mode="flat"
+                  style={{
+                    borderRadius: 10,
+                    // borderColor: Colors.white,
+                    // height: 45,
+                    // borderWidth: 1,
+                    marginBottom: 5,
+                    backgroundColor: Colors.white,
+                  }}
+                  placeholder="Zip Code"
+                  onChangeText={text => this.setState({zip: text})}
+                />
+              </View>
+            </View>
+
+            <View style={{marginBottom: 60, marginTop: 5}}>
               <TouchableOpacity
                 activeOpacity={0.8}
                 style={{
                   alignItems: 'center',
                   backgroundColor:
-                    this.state.companyName.length >= 4
-                      ? Colors.bigBgColors
-                      : Colors.bgColor,
+                    this.state.name.length >= 4
+                      ? Colors.primary
+                      : Colors.secondary,
                   borderRadius: 10,
                 }}
-                disabled={this.state.companyName.length >= 4 ? false : true}
+                disabled={this.state.name.length >= 4 ? false : true}
                 color={Colors.primary}
                 onPress={() =>
-                  isNaN(this.state.companyName)
+                  isNaN(this.state.name)
                     ? this.props.createCompany([
-                        this.state.companyName,
-                        this.state.companyDescription,
+                        this.state.name,
+                        this.state.companyAddress,
                       ])
                     : this.setState({
                         companyNameWarning: true,
@@ -251,8 +378,8 @@ class AddCompany extends Component {
                 </Text>
               </TouchableOpacity>
             </View>
-          </View>
-        </View>
+          </KeyboardAvoidingView>
+        </ScrollView>
       </View>
     );
   }

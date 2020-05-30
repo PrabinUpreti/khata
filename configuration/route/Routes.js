@@ -73,7 +73,7 @@ function TapNav() {
   return (
     <Tab.Navigator
       initialRouteName="Business"
-      barStyle={{backgroundColor: Colors.subBgColor}}>
+      barStyle={{backgroundColor: Colors.white}}>
       <Tab.Screen
         name="Dashboard"
         component={HomeStack}
@@ -115,9 +115,9 @@ function CompanyStack({navigation}) {
   return (
     <BusinessStack.Navigator
       screenOptions={{
-        headerTintColor: Colors.white,
+        headerTintColor: Colors.black,
         headerStyle: {
-          backgroundColor: Colors.subBgColor,
+          backgroundColor: Colors.white,
         },
       }}>
       <BusinessStack.Screen
@@ -128,7 +128,8 @@ function CompanyStack({navigation}) {
             <Icon.Button
               name="ios-menu"
               size={30}
-              backgroundColor={Colors.subBgColor}
+              backgroundColor={Colors.white}
+              color={Colors.black}
               style={{
                 paddingLeft: 10,
                 paddingRight: 0,
@@ -177,9 +178,9 @@ function LogoutStack({navigation}) {
   return (
     <ProfileStack.Navigator
       screenOptions={{
-        headerTintColor: Colors.white,
+        headerTintColor: Colors.black,
         headerStyle: {
-          backgroundColor: Colors.subBgColor,
+          backgroundColor: Colors.white,
         },
       }}>
       <ProfileStack.Screen
