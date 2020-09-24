@@ -351,18 +351,38 @@ class AddCompany extends Component {
                 style={{
                   alignItems: 'center',
                   backgroundColor:
-                    this.state.name.length >= 4
+                    this.state.name.length >= 4 &&
+                    this.state.companyAddress.length >= 4 &&
+                    this.state.phone
                       ? Colors.primary
                       : Colors.secondary,
                   borderRadius: 10,
                 }}
-                disabled={this.state.name.length >= 4 ? false : true}
+                disabled={
+                  this.state.name.length >= 4 &&
+                  this.state.companyAddress.length >= 4 &&
+                  this.state.phone
+                    ? false
+                    : true
+                }
                 color={Colors.primary}
                 onPress={() =>
-                  isNaN(this.state.name)
+                  isNaN(
+                    this.state.name &&
+                      this.state.companyAddress &&
+                      this.state.phone,
+                  )
                     ? this.props.createCompany([
                         this.state.name,
                         this.state.companyAddress,
+
+                        this.state.propiterName,
+                        this.state.panNumber,
+                        this.state.phone,
+                        this.state.website,
+                        this.state.email,
+                        this.state.zip,
+                        this.state.logo,
                       ])
                     : this.setState({
                         companyNameWarning: true,

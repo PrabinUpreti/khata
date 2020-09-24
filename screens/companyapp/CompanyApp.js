@@ -191,7 +191,18 @@ export default class CompanyApp extends Component {
     this.setState({coverScreen: true});
     companyName.push({
       name: name[0],
-      description: name[1],
+      companyAddress: name[1],
+
+      propiterName: name[2],
+      panNumber: name[3],
+
+      phone: name[4],
+      website: name[5],
+
+      email: name[6],
+      zip: name[7],
+      logo: name[7],
+
       id: companyName.length,
     });
     console.log(companyName);
@@ -203,7 +214,7 @@ export default class CompanyApp extends Component {
 
     return (
       <Fragment>
-        <View style={{backgroundColor: Colors.lightBlue, marginBottom: 2}}>
+        <View style={{backgroundColor: Colors.gray, marginBottom: 2}}>
           <ScrollView
             style={{
               paddingHorizontal: 10,

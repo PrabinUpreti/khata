@@ -8,14 +8,21 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import {Icon} from 'react-native-vector-icons/MaterialCommunityIcons';
+import {TouchableNativeFeedback} from 'react-native-gesture-handler';
+import {Colors} from './../configuration/colors/Colors';
 
 export default function DrawerContent(props) {
   console.log(props);
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
-        <Drawer.Section style={{marginLeft: 20}}>
-          <View
+        <Drawer.Section
+          style={{
+            paddingLeft: 20,
+          }}>
+          <TouchableNativeFeedback
+            active={props.state.index == 0 ? true : false}
+            onPress={() => props.navigation.navigate('Profile')}
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -28,73 +35,86 @@ export default function DrawerContent(props) {
               />
             </View>
             <View style={{padding: 10}}>
-              <Text style={{fontWeight: 'bold', fontSize: 20}}>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: 20,
+                  color: props.state.index == 0 ? Colors.info : null,
+                }}>
                 Prabin raj Upreti
               </Text>
-              <Text style={{fontSize: 10}}>upretirajprabin@gmail.com</Text>
+              <Text
+                style={{
+                  fontSize: 10,
+                  color: props.state.index == 0 ? Colors.info : null,
+                }}>
+                upretirajprabin@gmail.com
+              </Text>
             </View>
-          </View>
+          </TouchableNativeFeedback>
         </Drawer.Section>
         <View>
           <Drawer.Section>
             {/* <DrawerItemList {...props} /> */}
             <Drawer.Item
-              active={props.state.index == 0 ? true : false}
+              active={props.state.index == 1 ? true : false}
               icon="home"
               label="Home"
               onPress={() => props.navigation.navigate('Home')}
             />
             <Drawer.Item
-              active={props.state.index == 1 ? true : false}
+              active={props.state.index == 2 ? true : false}
               icon="send"
               label="Send Invoice"
-              onPress={() => props.navigation.navigate('Customers')}
-            />
-            <Drawer.Item
-              active={props.state.index == 2 ? true : false}
-              icon="clipboard-check"
-              label="Mark invoice paid"
-              onPress={() => alert('clicked')}
+              onPress={() => props.navigation.navigate('Send invoice')}
             />
             <Drawer.Item
               active={props.state.index == 3 ? true : false}
-              icon="bag-personal"
-              label="Personal Expences/income"
-              onPress={() => alert('clicked')}
+              icon="clipboard-check"
+              label="Mark invoice paid"
+              onPress={() => props.navigation.navigate('Mark invoice paid')}
             />
             <Drawer.Item
               active={props.state.index == 4 ? true : false}
-              icon="account-group"
-              label="Customers"
-              onPress={() => alert('clicked')}
+              icon="bag-personal"
+              label="Personal Expences/income"
+              onPress={() =>
+                props.navigation.navigate('Personal Expences/income')
+              }
             />
             <Drawer.Item
               active={props.state.index == 5 ? true : false}
+              icon="account-group"
+              label="Customers"
+              onPress={() => props.navigation.navigate('Customers')}
+            />
+            <Drawer.Item
+              active={props.state.index == 6 ? true : false}
               icon="factory"
               label="Sheller/Company"
-              onPress={() => alert('clicked')}
+              onPress={() => props.navigation.navigate('Sheller/Company')}
             />
           </Drawer.Section>
           <Drawer.Section>
             <Drawer.Item
-              active={props.state.index == 1 ? true : false}
+              active={props.state.index == 7 ? true : false}
               icon="account-badge-horizontal"
               label="About Us"
-              onPress={() => alert('clicked')}
+              onPress={() => props.navigation.navigate('About Us')}
             />
 
             <Drawer.Item
-              active={props.state.index == 1 ? true : false}
+              active={props.state.index == 8 ? true : false}
               icon="shield-lock"
               label="Privacy and Policy"
-              onPress={() => alert('clicked')}
+              onPress={() => props.navigation.navigate('Privacy and Policy')}
             />
 
             <Drawer.Item
-              active={props.state.index == 1 ? true : false}
+              active={props.state.index == 9 ? true : false}
               icon="settings"
               label="Setting"
-              onPress={() => alert('clicked')}
+              onPress={() => props.navigation.navigate('Setting')}
             />
           </Drawer.Section>
         </View>
@@ -103,9 +123,10 @@ export default function DrawerContent(props) {
       <Drawer.Section />
       <Drawer.Section style={{borderTopWidth: 0, marginBottom: 15}}>
         <Drawer.Item
+          active={props.state.index == 10 ? true : false}
           icon="exit-to-app"
-          label="SignOut"
-          onPress={() => alert('clicked')}
+          label="Sign out"
+          onPress={() => props.navigation.navigate('Sign out')}
           // {() => {
           //   return <Icon name="menu" color="#000" size={24} />;
           // }}

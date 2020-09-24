@@ -11,15 +11,25 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import {Colors} from './../colors/Colors';
 
+///import Components
+
 import LoginApp from './../../screens/loginapp/LoginApp';
 import CompanyApp from './../../screens/companyapp/CompanyApp';
 import HomeApp from '../../screens/homeapp/HomeApp';
 import DrawerContent from './../../screens/DrawerContent';
-import AddTransaction from './../../screens/companyapp/components/AddTransaction';
+import SendInvoiceApp from './../../screens/sendinvoiceapp/SendInvoiceApp';
+// import AddTransaction from './../../screens/companyapp/components/AddTransaction';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {View} from 'native-base';
 import Auth from './../../configuration/fireauth/FirebaseConfig';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MarkInvoicePaidApp from '../../screens/markinvoicepaidapp/MarkInvoicePaidApp';
+import PersonalExpencesOrIncomeApp from '../../screens/personalexpencesorincomeapp/PersonalExpencesOrIncomeApp';
+import CustomersApp from '../../screens/customersapp/CustomersApp';
+import ShellerOrCompanyApp from '../../screens/shellerorcompanyapp/ShellerOrCompanyApp';
+import AboutUsApp from '../../screens/aboutusapp/AboutUsApp';
+import PrivacyAndpolicyApp from '../../screens/privacyandpolicyapp/PrivacyAndPolicyApp';
+import SettingApp from '../../screens/settingapp/SettingApp';
 
 // import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // import {TapGestureHandler} from 'react-native-gesture-handler';
@@ -30,6 +40,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 const BusinessStack = createStackNavigator();
 const DashboardStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
+const SendInvoiceStack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -121,7 +132,7 @@ function CompanyStack({navigation}) {
         },
       }}>
       <BusinessStack.Screen
-        name="Business"
+        name="Reckon Book"
         component={CompanyApp}
         options={{
           headerLeft: () => (
@@ -191,7 +202,8 @@ function LogoutStack({navigation}) {
             <Icon.Button
               name="ios-menu"
               size={30}
-              backgroundColor={Colors.subBgColor}
+              backgroundColor={Colors.white}
+              color={Colors.black}
               style={{
                 paddingLeft: 10,
                 paddingRight: 0,
@@ -204,6 +216,33 @@ function LogoutStack({navigation}) {
     </ProfileStack.Navigator>
   );
 }
+
+function SendInvoice({navigation}) {
+  return (
+    <SendInvoiceStack.Navigator>
+      <SendInvoiceStack.Screen
+        options={{
+          headerLeft: () => (
+            <Icon.Button
+              name="ios-menu"
+              size={30}
+              backgroundColor={Colors.white}
+              color={Colors.black}
+              style={{
+                paddingLeft: 10,
+                paddingRight: 0,
+              }}
+              onPress={() => navigation.openDrawer()}
+            />
+          ),
+        }}
+        name="Send Invoice"
+        component={SendInvoiceApp}
+      />
+    </SendInvoiceStack.Navigator>
+  );
+}
+
 export default class Routes extends Component {
   componentDidMount() {
     Auth.onAuthStateChanged(user => {
@@ -240,57 +279,40 @@ export default class Routes extends Component {
                       <Drawer.Navigator
                         initialRouteName="Home"
                         drawerContent={props => <DrawerContent {...props} />}>
+                        <Drawer.Screen name="Profile" component={HomeApp} />
+
                         <Drawer.Screen name="Home" component={TapNav} />
-                        <Drawer.Screen name="Send invoice" component={TapNav} />
+                        <Drawer.Screen
+                          name="Send invoice"
+                          component={SendInvoice}
+                        />
                         <Drawer.Screen
                           name="Mark invoice paid"
-                          component={TapNav}
+                          component={MarkInvoicePaidApp}
                         />
                         <Drawer.Screen
-                          name="Personal Expences or income"
-                          component={TapNav}
+                          name="Personal Expences/income"
+                          component={PersonalExpencesOrIncomeApp}
                         />
-                        <Drawer.Screen name="Customers" component={TapNav} />
-                        <Drawer.Screen name="Add Sheller" component={TapNav} />
-                        <Drawer.Screen name="About Us" component={TapNav} />
-                        <Drawer.Screen name="Setting" component={TapNav} />
+                        <Drawer.Screen
+                          name="Customers"
+                          component={CustomersApp}
+                        />
+                        <Drawer.Screen
+                          name="Sheller/Company"
+                          component={ShellerOrCompanyApp}
+                        />
 
+                        <Drawer.Screen name="About Us" component={AboutUsApp} />
                         <Drawer.Screen
-                          name="Notifications"
-                          component={HomeApp}
+                          name="Privacy and Policy"
+                          component={PrivacyAndpolicyApp}
                         />
+                        <Drawer.Screen name="Setting" component={SettingApp} />
+
+                        <Drawer.Screen name="Sign out" component={HomeApp} />
                       </Drawer.Navigator>
-                      {/* <Tab.Navigator
-                        // initialRouteName="More"
-                        barStyle={{backgroundColor: Colors.subBgColor}}>
-                        <Tab.Screen name="Home" component={HomeApp} />
-                        <Tab.Screen
-                          name="More"
-                          component={AddTransactionScreen}
-                        />
-                        <Tab.Screen name="Profile" component={LogOut} />
-                      </Tab.Navigator> */}
                     </>
-
-                    /* <Stack.Navigator>
-                    <Stack.Screen
-                      options={{
-                        headerShown: false,
-                      }}
-                      name="Home"
-                      component={MyTabs}
-                    />
-
-                    <Stack.Screen
-                      options={
-                        {
-                          // headerShown: false,
-                        }
-                      }
-                      name="AddTransaction"
-                      component={AddTransaction}
-                    />
-                  </Stack.Navigator> */
                   }
                 </>
               ) : (
